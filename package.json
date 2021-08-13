@@ -9,7 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "prestart:dev": "docker-compose -f ./compose/development.yml up -d --build --force-recreate; yarn migration:run",
+    "prestart:dev": "docker-compose -f ./compose/development.yml up -d --build --force-recreate",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
