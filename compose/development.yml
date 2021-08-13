@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    image: postgres:11.5
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: emma
+    ports:
+      - 5432:5432
+
+  redis:
+    image: redis:5
+    ports:
+      - "6379:6379"
