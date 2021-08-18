@@ -31,6 +31,15 @@ $ npm run test
 $ npm run test:e2e
 ```
 
+> http://localhost:5000
+
+## Endpoints
+Endpoint: /users/:userId/reports
+Method: GET
+Query parameter: 
+ - startDate: Date
+ - endDate: Date
+
 ## Database
 There is a one reason to choose sql based on the requirement, SQL has percent_rank function to get the percentile rank.
 
