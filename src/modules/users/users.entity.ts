@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Generated,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -21,6 +22,7 @@ export class User {
     nullable: false,
     readonly: true,
   })
+  @Generated('uuid')
   uuid: string;
 
   @Column({

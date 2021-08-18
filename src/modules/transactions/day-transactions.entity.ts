@@ -12,7 +12,7 @@ import {
 import { Merchant } from '../merchants/merchants.entity';
 import { User } from '../users/users.entity';
 
-@Entity('transactions')
+@Entity('day_transactions')
 export class Transaction {
   @Exclude()
   @PrimaryGeneratedColumn()
@@ -54,7 +54,7 @@ export class Transaction {
     nullable: true,
     default: 0,
   })
-  amount: Number;
+  total: Number;
 
   @CreateDateColumn({
     name: 'created_at',

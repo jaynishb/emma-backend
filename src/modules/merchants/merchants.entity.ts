@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Generated,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -21,6 +22,7 @@ export class Merchant {
     nullable: false,
     readonly: true,
   })
+  @Generated('uuid')
   uuid: string;
 
   @Column({
@@ -46,19 +48,6 @@ export class Merchant {
     nullable: true,
   })
   funnyGifUrl: string;
-
-  @Column({
-    type: 'timestamptz',
-    nullable: true,
-  })
-  date: Date;
-
-  @Column({
-    type: 'float4',
-    nullable: true,
-    default: 0,
-  })
-  amount: Number;
 
   @OneToMany(
     () => Transaction,
