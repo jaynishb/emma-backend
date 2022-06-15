@@ -2,11 +2,12 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    UpdateDateColumn,
-    PrimaryGeneratedColumn,
-    OneToMany,
     ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm';
+
 import { Feature } from '../feature/feature.entity';
 import { User } from '../user/user.entity';
 
@@ -31,7 +32,7 @@ export class Ruleset {
     features: Feature[];
 
     @Column('jsonb', { nullable: true })
-    rules?: object[];
+    rules?: Record<string, any>[];
 
     @ManyToOne(() => User, ({ rulesets }) => rulesets)
     createdBy: User;

@@ -4,15 +4,15 @@ import {
     Body,
     Controller,
     Get,
-    Post,
     HttpCode,
     HttpStatus,
+    Param,
+    Patch,
+    Post,
     Query,
     UseGuards,
     UseInterceptors,
     ValidationPipe,
-    Param,
-    Patch,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { I18nService } from 'nestjs-i18n';
@@ -105,7 +105,7 @@ export class FeatureController {
         @AuthUser() user: User,
         @Body() feature: FeatureDto,
     ): Promise<Feature> {
-        let featureWithCreatedBy = {
+        const featureWithCreatedBy = {
             ...feature,
             createdBy: user,
         };

@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository } from 'typeorm';
+
 import { FeatureDto } from './dto/FeatureDto';
 import { FeaturesPageDto } from './dto/FeaturePageDto';
 import { FeaturesPageOptionsDto } from './dto/FeaturesPageOptionsDto';
@@ -12,7 +13,7 @@ export class FeatureService {
 
     constructor(
         @InjectRepository(Feature)
-        private readonly featureRepository: Repository<Feature>
+        private readonly featureRepository: Repository<Feature>,
     ) {}
 
     async findOne(id: string) {
@@ -51,8 +52,13 @@ export class FeatureService {
         return this.featureRepository.findOneOrFail({ featureKey });
     }
 
-    async updateFeatureByKey({ featureKey, ...rest }: DeepPartial<Feature>): Promise<Feature> {
-        const feature = await this.featureRepository.findOneOrFail({ featureKey });
+    async updateFeatureByKey({
+        featureKey,
+        ...rest
+    }: DeepPartial<Feature>): Promise<Feature> {
+        const feature = await this.featureRepository.findOneOrFail({
+            featureKey,
+        });
         return this.featureRepository.save({ ...feature, ...rest });
     }
 }

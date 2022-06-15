@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+
 import { User } from '../../user/user.entity';
 import { FieldType } from '../enum/field-type.enum';
 

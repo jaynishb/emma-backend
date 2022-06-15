@@ -7,11 +7,9 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 
-import { AbstractEntity } from '../../common/abstract.entity';
 import { RoleType } from '../../common/constants/role-type';
 import { Feature } from '../feature/feature.entity';
 import { Ruleset } from '../rule-set/rule-set.entity';
-import { UserDto } from './dto/UserDto';
 
 @Entity({ name: 'users' })
 export class User {

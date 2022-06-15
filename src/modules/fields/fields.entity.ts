@@ -2,10 +2,11 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    UpdateDateColumn,
-    PrimaryGeneratedColumn,
     ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm';
+
 import { User } from '../user/user.entity';
 import { FieldType } from './enum/field-type.enum';
 

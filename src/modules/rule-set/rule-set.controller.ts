@@ -1,18 +1,18 @@
 'use strict';
 
 import {
+    Body,
     Controller,
     Get,
-    Post,
     HttpCode,
     HttpStatus,
+    Param,
+    Patch,
+    Post,
     Query,
     UseGuards,
     UseInterceptors,
     ValidationPipe,
-    Body,
-    Param,
-    Patch,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { I18nService } from 'nestjs-i18n';
@@ -72,7 +72,7 @@ export class RulesetController {
         @AuthUser() user: User,
         @Body() ruleset: RulesetDto,
     ): Promise<Ruleset> {
-        let rulesetWithCreatedBy = {
+        const rulesetWithCreatedBy = {
             ...ruleset,
             createdBy: user,
         };

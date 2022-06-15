@@ -7,13 +7,13 @@ import * as path from 'path';
 
 import { contextMiddleware } from './middlewares';
 import { AuthModule } from './modules/auth/auth.module';
+import { FeatureModule } from './modules/feature/feature.module';
+import { FieldModule } from './modules/fields/fields.module';
 import { MathModule } from './modules/math/math.module';
+import { RuleSetModule } from './modules/rule-set/rule-set.module';
 import { UserModule } from './modules/user/user.module';
 import { ConfigService } from './shared/services/config.service';
 import { SharedModule } from './shared/shared.module';
-import { FeatureModule } from './modules/feature/feature.module';
-import { RuleSetModule } from './modules/rule-set/rule-set.module';
-import { FieldModule } from './modules/fields/fields.module';
 
 @Module({
     imports: [

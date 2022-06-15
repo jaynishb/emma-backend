@@ -2,13 +2,14 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    UpdateDateColumn,
-    PrimaryGeneratedColumn,
-    OneToOne,
     JoinColumn,
-    OneToMany,
     ManyToOne,
+    OneToMany,
+    OneToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm';
+
 import { Ruleset } from '../rule-set/rule-set.entity';
 import { User } from '../user/user.entity';
 
@@ -36,16 +37,16 @@ export class Feature {
     tags: string[];
 
     @Column('jsonb', { nullable: true })
-    variants?: object[];
+    variants?: Record<string, any>[];
 
     @Column('jsonb', { nullable: true })
-    rules?: object[];
+    rules?: Record<string, any>[];
 
     @ManyToOne(() => Ruleset, ({ features }) => features, { eager: true })
     ruleset: Ruleset;
 
     @Column('jsonb', { nullable: true })
-    values?: object[];
+    values?: Record<string, any>[];
 
     @ManyToOne(() => User, ({ features }) => features, { eager: true })
     createdBy: User;
