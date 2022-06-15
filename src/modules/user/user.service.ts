@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FindConditions } from 'typeorm';
+import { FindConditions, FindOneOptions } from 'typeorm';
 
 import { FileNotImageException } from '../../exceptions/file-not-image.exception';
 import { IFile } from '../../interfaces/IFile';
@@ -8,7 +8,7 @@ import { ValidatorService } from '../../shared/services/validator.service';
 import { UserRegisterDto } from '../auth/dto/UserRegisterDto';
 import { UsersPageDto } from './dto/UsersPageDto';
 import { UsersPageOptionsDto } from './dto/UsersPageOptionsDto';
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -22,12 +22,15 @@ export class UserService {
     /**
      * Find single user
      */
-    findOne(findData: FindConditions<UserEntity>): Promise<UserEntity> {
-        return this.userRepository.findOne(findData);
+    findOne(
+        findData: FindConditions<User>,
+        options?: FindOneOptions<User>,
+    ): Promise<User> {
+        return this.userRepository.findOne(findData, options);
     }
     async findByUsernameOrEmail(
         options: Partial<{ username: string; email: string }>,
-    ): Promise<UserEntity | undefined> {
+    ): Promise<User | undefined> {
         const queryBuilder = this.userRepository.createQueryBuilder('user');
 
         if (options.email) {
@@ -47,7 +50,7 @@ export class UserService {
     async createUser(
         userRegisterDto: UserRegisterDto,
         file: IFile,
-    ): Promise<UserEntity> {
+    ): Promise<User> {
         let avatar: string;
         if (file && !this.validatorService.isImage(file.mimetype)) {
             throw new FileNotImageException();
@@ -68,6 +71,6 @@ export class UserService {
             pageOptionsDto,
         );
 
-        return new UsersPageDto(users.toDtos(), pageMetaDto);
+        return new UsersPageDto(users, pageMetaDto);
     }
 }

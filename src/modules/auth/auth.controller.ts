@@ -23,7 +23,7 @@ import { AuthGuard } from '../../guards/auth.guard';
 import { AuthUserInterceptor } from '../../interceptors/auth-user-interceptor.service';
 import { IFile } from '../../interfaces/IFile';
 import { UserDto } from '../user/dto/UserDto';
-import { UserEntity } from '../user/user.entity';
+import { User } from '../user/user.entity';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import { LoginPayloadDto } from './dto/LoginPayloadDto';
@@ -47,10 +47,9 @@ export class AuthController {
     async userLogin(
         @Body() userLoginDto: UserLoginDto,
     ): Promise<LoginPayloadDto> {
-        const userEntity = await this.authService.validateUser(userLoginDto);
-
-        const token = await this.authService.createToken(userEntity);
-        return new LoginPayloadDto(userEntity.toDto(), token);
+        const user = await this.authService.validateUser(userLoginDto);
+        const token = await this.authService.createToken(user);
+        return new LoginPayloadDto(user, token);
     }
 
     @Post('register')
@@ -62,13 +61,13 @@ export class AuthController {
     async userRegister(
         @Body() userRegisterDto: UserRegisterDto,
         @UploadedFile() file: IFile,
-    ): Promise<UserDto> {
+    ): Promise<LoginPayloadDto> {
         const createdUser = await this.userService.createUser(
             userRegisterDto,
             file,
         );
-
-        return createdUser.toDto();
+        const token = await this.authService.createToken(createdUser);
+        return new LoginPayloadDto(createdUser, token);
     }
 
     @Get('me')
@@ -77,7 +76,7 @@ export class AuthController {
     @UseInterceptors(AuthUserInterceptor)
     @ApiBearerAuth()
     @ApiOkResponse({ type: UserDto, description: 'current user info' })
-    getCurrentUser(@AuthUser() user: UserEntity) {
-        return user.toDto();
+    getCurrentUser(@AuthUser() user: User) {
+        return user;
     }
 }

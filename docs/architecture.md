@@ -1,26 +1,26 @@
 # Architecture
 
-- [Architecture](#architecture)
-  - [`.vscode`](#vscode)
-  - [`docs`](#docs)
-  - [`.vuepress`](#vuepress)
-  - [`src`](#src)
-    - [`common`](#common)
-    - [`decorators`](#decorators)
-    - [`interceptors`](#interceptors)
-    - [`exception-filters`](#exception-filters)
-    - [`guards`](#guards)
-    - [`interfaces`](#interfaces)
-    - [`migrations`](#migrations)
-    - [`providers`](#providers)
-    - [`shared`](#shared)
-    - [`modules`](#modules)
-    - [`app.module.ts`](#appmodulets)
-    - [`boilerplate.polyfill.ts`](#boilerplatepolyfillts)
-    - [`snake-naming.strategy.ts`](#snake-namingstrategyts)
-  - [`.*.env`](#env)
-  - [`.eslintrc.json`](#eslintrcjson)
-  - [`tslint.json`](#tslintjson)
+-   [Architecture](#architecture)
+    -   [`.vscode`](#vscode)
+    -   [`docs`](#docs)
+    -   [`.vuepress`](#vuepress)
+    -   [`src`](#src)
+        -   [`common`](#common)
+        -   [`decorators`](#decorators)
+        -   [`interceptors`](#interceptors)
+        -   [`exception-filters`](#exception-filters)
+        -   [`guards`](#guards)
+        -   [`interfaces`](#interfaces)
+        -   [`migrations`](#migrations)
+        -   [`providers`](#providers)
+        -   [`shared`](#shared)
+        -   [`modules`](#modules)
+        -   [`app.module.ts`](#appmodulets)
+        -   [`boilerplate.polyfill.ts`](#boilerplatepolyfillts)
+        -   [`snake-naming.strategy.ts`](#snake-namingstrategyts)
+    -   [`.*.env`](#env)
+    -   [`.eslintrc.json`](#eslintrcjson)
+    -   [`tslint.json`](#tslintjson)
 
 ## `.vscode`
 
@@ -87,7 +87,7 @@ The root application module.
 We extend built in classes so you can use helper function anywhere.
 
 ```typescript
-const users: UserEntity[] = ...;
+const users: User[] = ...;
 
 const userDtos = users.toDtos();
 ```
@@ -98,7 +98,7 @@ We are using snake naming strategy for typeorm, so when you will generate migrat
 
 ## `.*.env`
 
-Environment variables which will load before app start and will be stored in `process.env`, (*) is a env name (development, staging, production, ...)
+Environment variables which will load before app start and will be stored in `process.env`, (\*) is a env name (development, staging, production, ...)
 
 ## `.eslintrc.json`
 

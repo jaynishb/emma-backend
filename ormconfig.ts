@@ -26,5 +26,5 @@ module.exports = {
     database: process.env.DB_DATABASE,
     namingStrategy: new SnakeNamingStrategy(),
     entities: ['src/modules/**/*.entity{.ts,.js}'],
-    migrations: ['src/migrations/*{.ts,.js}'],
+    migrations: ['migrations/*{.ts,.js}'],
 };

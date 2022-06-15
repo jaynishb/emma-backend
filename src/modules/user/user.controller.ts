@@ -21,7 +21,7 @@ import { RolesGuard } from '../../guards/roles.guard';
 import { AuthUserInterceptor } from '../../interceptors/auth-user-interceptor.service';
 import { UsersPageDto } from './dto/UsersPageDto';
 import { UsersPageOptionsDto } from './dto/UsersPageOptionsDto';
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -38,7 +38,7 @@ export class UserController {
     @Get('admin')
     @Roles(RoleType.USER)
     @HttpCode(HttpStatus.OK)
-    async admin(@AuthUser() user: UserEntity): Promise<string> {
+    async admin(@AuthUser() user: User): Promise<string> {
         const translation = await this._i18n.translate(
             'translations.keywords.admin',
             {

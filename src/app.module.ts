@@ -11,12 +11,18 @@ import { MathModule } from './modules/math/math.module';
 import { UserModule } from './modules/user/user.module';
 import { ConfigService } from './shared/services/config.service';
 import { SharedModule } from './shared/shared.module';
+import { FeatureModule } from './modules/feature/feature.module';
+import { RuleSetModule } from './modules/rule-set/rule-set.module';
+import { FieldModule } from './modules/fields/fields.module';
 
 @Module({
     imports: [
         AuthModule,
         UserModule,
+        FeatureModule,
+        RuleSetModule,
         MathModule,
+        FieldModule,
         TypeOrmModule.forRootAsync({
             imports: [SharedModule],
             useFactory: (configService: ConfigService) =>

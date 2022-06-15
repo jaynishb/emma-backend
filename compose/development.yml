@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    image: postgres:11.5
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: easyrelease
+    expose:
+      - 5433
+    ports:
+      - 5433:5432
