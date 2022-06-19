@@ -2,10 +2,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinColumn,
     ManyToOne,
-    OneToMany,
-    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
@@ -65,4 +62,11 @@ export class Feature {
         select: false,
     })
     updatedAt: Date;
+
+    @Column({
+        type: 'timestamptz',
+        nullable: true,
+        select: false,
+    })
+    deletedAt?: Date;
 }
