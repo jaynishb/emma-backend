@@ -1,6 +1,7 @@
 import {
     Column,
     CreateDateColumn,
+    DeleteDateColumn,
     Entity,
     ManyToOne,
     PrimaryGeneratedColumn,
@@ -63,10 +64,6 @@ export class Feature {
     })
     updatedAt: Date;
 
-    @Column({
-        type: 'timestamptz',
-        nullable: true,
-        select: false,
-    })
+    @DeleteDateColumn()
     deletedAt?: Date;
 }
