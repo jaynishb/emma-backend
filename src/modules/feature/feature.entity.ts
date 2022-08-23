@@ -1,11 +1,9 @@
 import {
     Column,
     CreateDateColumn,
+    DeleteDateColumn,
     Entity,
-    JoinColumn,
     ManyToOne,
-    OneToMany,
-    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
@@ -65,4 +63,7 @@ export class Feature {
         select: false,
     })
     updatedAt: Date;
+
+    @DeleteDateColumn()
+    deletedAt?: Date;
 }

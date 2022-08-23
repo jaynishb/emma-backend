@@ -61,4 +61,11 @@ export class FeatureService {
         });
         return this.featureRepository.save({ ...feature, ...rest });
     }
+
+    async deleteFeatureByKey(featureKey: string): Promise<Feature> {
+        return this.updateFeatureByKey({
+            featureKey,
+            deletedAt: new Date(),
+        });
+    }
 }

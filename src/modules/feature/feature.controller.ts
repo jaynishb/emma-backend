@@ -3,6 +3,7 @@
 import {
     Body,
     Controller,
+    Delete,
     Get,
     HttpCode,
     HttpStatus,
@@ -63,7 +64,7 @@ export class FeatureController {
     @HttpCode(HttpStatus.OK)
     @ApiResponse({
         status: HttpStatus.OK,
-        description: 'Get feature list',
+        description: 'Get feature',
         type: FeaturesPageDto,
     })
     async getFeatureByFeatureKey(
@@ -110,5 +111,19 @@ export class FeatureController {
             createdBy: user,
         };
         return this.featureService.addFeature(featureWithCreatedBy);
+    }
+
+    @Delete(':featurekey')
+    @Roles(RoleType.USER)
+    @HttpCode(HttpStatus.OK)
+    @ApiResponse({
+        status: HttpStatus.OK,
+        description: 'Deleted feature list',
+        type: FeaturesPageDto,
+    })
+    async deleteFeatureByFeatureKey(
+        @Param('featurekey') featureKey: string,
+    ): Promise<Feature> {
+        return this.featureService.deleteFeatureByKey(featureKey);
     }
 }
