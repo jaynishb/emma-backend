@@ -20,4 +20,8 @@ export class FieldDto {
     @Type(() => User)
     @IsOptional()
     createdBy?: User;
+
+    @Type(() => Date)
+    @IsOptional()
+    deletedAt?: Date;
 }

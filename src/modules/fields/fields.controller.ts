@@ -3,6 +3,7 @@
 import {
     Body,
     Controller,
+    Delete,
     Get,
     HttpCode,
     HttpStatus,
@@ -101,15 +102,30 @@ export class FieldController {
         description: 'Updated feature list',
         type: FieldsPageDto,
     })
-    async updateFeatureByFeatureKey(
-        @AuthUser() user: User,
+    async updateField(
         @Param('id') id: string,
         @Body() field: DeepPartial<FieldDto>,
     ): Promise<FieldDto> {
-        console.log(id, field, 'heyyyy');
         return this.fieldService.addOrUpdateField({
             id,
             ...field,
+        });
+    }
+
+    @Delete(':id')
+    @Roles(RoleType.USER)
+    @HttpCode(HttpStatus.OK)
+    @ApiResponse({
+        status: HttpStatus.OK,
+        description: 'Deleted field successfully',
+        type: FieldsPageDto,
+    })
+    async deleteField(
+        @Param('id') id: string,
+    ): Promise<FieldDto> {
+        return this.fieldService.addOrUpdateField({
+            id,
+            deletedAt: new Date(),
         });
     }
 }

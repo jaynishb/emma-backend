@@ -1,6 +1,7 @@
 import {
     Column,
     CreateDateColumn,
+    DeleteDateColumn,
     Entity,
     ManyToOne,
     PrimaryGeneratedColumn,
@@ -46,4 +47,7 @@ export class Field {
         select: false,
     })
     updatedAt: Date;
+
+    @DeleteDateColumn()
+    deletedAt?: Date;
 }
