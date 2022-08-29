@@ -62,7 +62,9 @@ export class UserService {
 
         const user = this.userRepository.create({ ...userRegisterDto, avatar });
 
-        return this.userRepository.save(user);
+        await this.userRepository.save(user);
+
+        return user;
     }
 
     async getUsers(pageOptionsDto: UsersPageOptionsDto): Promise<UsersPageDto> {

@@ -1,5 +1,6 @@
 import {
     Body,
+    ConflictException,
     Controller,
     Get,
     HttpCode,
@@ -16,6 +17,7 @@ import {
     ApiOkResponse,
     ApiTags,
 } from '@nestjs/swagger';
+import { QueryFailedError } from 'typeorm';
 
 import { AuthUser } from '../../decorators/auth-user.decorator';
 import { ApiFile } from '../../decorators/swagger.schema';
@@ -29,6 +31,11 @@ import { AuthService } from './auth.service';
 import { LoginPayloadDto } from './dto/LoginPayloadDto';
 import { UserLoginDto } from './dto/UserLoginDto';
 import { UserRegisterDto } from './dto/UserRegisterDto';
+
+const queryFailedGuard = (
+    err: any,
+): err is QueryFailedError & { code: string } =>
+    err instanceof QueryFailedError;
 
 @Controller('auth')
 @ApiTags('auth')
@@ -62,12 +69,21 @@ export class AuthController {
         @Body() userRegisterDto: UserRegisterDto,
         @UploadedFile() file: IFile,
     ): Promise<LoginPayloadDto> {
-        const createdUser = await this.userService.createUser(
-            userRegisterDto,
-            file,
-        );
-        const token = await this.authService.createToken(createdUser);
-        return new LoginPayloadDto(createdUser, token);
+        try {
+            const createdUser = await this.userService.createUser(
+                userRegisterDto,
+                file,
+            );
+            const token = await this.authService.createToken(createdUser);
+            return new LoginPayloadDto(createdUser, token);
+        } catch (err) {
+            if (queryFailedGuard(err) && err?.code === '23505') {
+                throw new ConflictException(
+                    'Already registered with this email!',
+                );
+            }
+            throw err;
+        }
     }
 
     @Get('me')
