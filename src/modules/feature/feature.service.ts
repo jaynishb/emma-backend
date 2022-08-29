@@ -41,6 +41,12 @@ export class FeatureService {
             .leftJoinAndSelect('f.createdBy', 'users')
             .orderBy('f.createdAt', 'DESC');
 
+        if (pageOptionsDto.tags?.length) {
+            queryBuilder.where('f.tags SIMILAR TO :tags', {
+                tags: `%(${pageOptionsDto.tags.join('|')})%`,
+            });
+        }
+
         const [features, pageMetaDto] = await queryBuilder.paginate(
             pageOptionsDto,
         );
