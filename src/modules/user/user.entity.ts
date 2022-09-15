@@ -9,6 +9,7 @@ import {
 
 import { RoleType } from '../../common/constants/role-type';
 import { Feature } from '../feature/feature.entity';
+import { Project } from '../projects/project.entity';
 import { Ruleset } from '../rule-set/rule-set.entity';
 
 @Entity({ name: 'users' })
@@ -45,6 +46,9 @@ export class User {
 
     @OneToMany(() => Feature, ({ createdBy }) => createdBy)
     features: Feature[];
+
+    @OneToMany(() => Feature, ({ createdBy }) => createdBy)
+    projects: Project[];
 
     @CreateDateColumn({
         type: 'timestamptz',

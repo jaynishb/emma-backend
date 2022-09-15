@@ -24,13 +24,11 @@ import { Roles } from '../../decorators/roles.decorator';
 import { AuthGuard } from '../../guards/auth.guard';
 import { RolesGuard } from '../../guards/roles.guard';
 import { AuthUserInterceptor } from '../../interceptors/auth-user-interceptor.service';
-import { Feature } from '../feature/feature.entity';
 import { User } from '../user/user.entity';
 import { RulesetDto } from './dto/RulesetDto';
 import { RulesetsPageDto } from './dto/RulesetPageDto';
 import { RulesetsPageOptionsDto } from './dto/RulesetPageOptionsDto';
 import { Ruleset } from './rule-set.entity';
-import { RuleSetModule } from './rule-set.module';
 import { RulesetService } from './rule-set.service';
 
 @Controller('rulesets')
