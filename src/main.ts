@@ -15,6 +15,7 @@ import {
 } from 'typeorm-transactional-cls-hooked';
 
 import { AppModule } from './app.module';
+import { EntityNotFoundExceptionFilter } from './exceptions/entity-not-found-exception.filter';
 import { HttpExceptionFilter } from './filters/bad-request.filter';
 import { QueryFailedFilter } from './filters/query-failed.filter';
 import { ConfigService } from './shared/services/config.service';
@@ -48,6 +49,8 @@ async function bootstrap() {
     );
 
     app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
+
+    app.useGlobalFilters(new EntityNotFoundExceptionFilter());
 
     app.useGlobalPipes(
         new ValidationPipe({
