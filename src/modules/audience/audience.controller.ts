@@ -60,18 +60,14 @@ export class AudienceController {
     @HttpCode(HttpStatus.OK)
     @ApiResponse({
         status: HttpStatus.CREATED,
-        description: 'Created audience toggle',
+        description: 'Created audience ',
         type: Audience,
     })
     async addAudience(
         @AuthUser() user: User,
         @Body() audience: AudienceDto,
     ): Promise<Audience> {
-        const audienceWithCreatedBy = {
-            ...audience,
-            createdBy: user,
-        };
-        return this.audienceService.addAudience(audienceWithCreatedBy);
+        return this.audienceService.addAudience(audience);
     }
 
     @Delete(':uuid')
