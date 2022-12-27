@@ -18,8 +18,8 @@ import { CustomAttributePageOptionsDto } from "./dto/CustomAttributePageOptionDt
 
 
 
-@Controller('customAttribute')
-@ApiTags('customAttribute')
+@Controller('custom-attributes')
+@ApiTags('custom-attributes')
 @UseGuards(AuthGuard,RolesGuard)
 @UseInterceptors(AuthUserInterceptor)
 @ApiBearerAuth()
@@ -37,7 +37,7 @@ export class CustomAttributeController{
     @HttpCode(HttpStatus.OK)
     @ApiResponse({
         status: HttpStatus.OK,
-        description: 'Get Custom_attribute List',
+        description: 'Get CustomAttribute List',
         type: CustomAttributePageDto,
     })
     async getCustomAttribute(
@@ -56,15 +56,11 @@ export class CustomAttributeController{
         description: 'Created Custom attribute',
         type: CustomAttribute,
     })
-    async addCustom_attribute(
+    async addCustomAttribute(
         @AuthUser() user: User,
-        @Body() custom_attribut: CustomAttributeDto,
+        @Body() customAttribute: CustomAttributeDto,
     ): Promise<CustomAttribute> {
-        const custom_attributeWithCreatedBy = {
-            ...custom_attribut,
-            createdBy: user,
-        };
-        return this.customAttributeService.addCustomAttribute(custom_attributeWithCreatedBy);
+        return this.customAttributeService.addCustomAttribute(customAttribute);
     }
 
 
