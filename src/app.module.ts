@@ -15,6 +15,7 @@ import { RuleSetModule } from './modules/rule-set/rule-set.module';
 import { UserModule } from './modules/user/user.module';
 import { ConfigService } from './shared/services/config.service';
 import { SharedModule } from './shared/shared.module';
+import { CustomAttributeModule } from './modules/custom_attributes/customAttribute.module';
 
 @Module({
     imports: [
@@ -25,6 +26,7 @@ import { SharedModule } from './shared/shared.module';
         MathModule,
         FieldModule,
         ProjectModule,
+        CustomAttributeModule,
         TypeOrmModule.forRootAsync({
             imports: [SharedModule],
             useFactory: (configService: ConfigService) =>
