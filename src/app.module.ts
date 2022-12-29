@@ -6,6 +6,7 @@ import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
 import * as path from 'path';
 
 import { contextMiddleware } from './middlewares';
+import { AudienceModule } from './modules/audience/audience.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { FeatureModule } from './modules/feature/feature.module';
 import { FieldModule } from './modules/fields/fields.module';
@@ -25,6 +26,7 @@ import { SharedModule } from './shared/shared.module';
         MathModule,
         FieldModule,
         ProjectModule,
+        AudienceModule,
         TypeOrmModule.forRootAsync({
             imports: [SharedModule],
             useFactory: (configService: ConfigService) =>
